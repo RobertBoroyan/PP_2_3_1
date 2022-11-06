@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UsersControllter {
 
     private UserDAO userDAO;
@@ -23,12 +23,12 @@ public class UsersControllter {
 
     @GetMapping()
     public String index(Model model){
-        model.addAttribute("users", userDAO.index());
-        return "users/index";
+        model.addAttribute("user", userDAO.index());
+        return "user/index";
     }
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userDAO.show(id));
-        return "users/show";
+        return "user/show";
     }
 }
