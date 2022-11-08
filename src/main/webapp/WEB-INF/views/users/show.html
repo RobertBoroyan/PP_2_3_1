@@ -9,5 +9,14 @@
 <p th:text="${user.getSurName()}">VALUE</p>
 <p th:text="${user.getId()}">VALUE</p>
 
+<form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+<br/>
+<hr/>
+
+<a th:href="@{/users/{id}/update(id=${user.getId()})}">Update this user</a>
+
 </body>
 </html>
