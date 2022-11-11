@@ -1,41 +1,43 @@
 package PP_2_3_1.controller;
 
-import PP_2_3_1.dao.UserDAO;
+import PP_2_3_1.dao.UserDAOImpl;
 import PP_2_3_1.models.User;
-import jakarta.validation.Valid;
+
+import PP_2_3_1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/users")
 public class UsersControllter {
 
-    private UserDAO userDAO;
+    private UserService userService;
 
     @Autowired
-    public UsersControllter(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public UsersControllter(UserService userService) {
+        this.userService = userService;
     }
 
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("users", userDAO.getUsers());
+        model.addAttribute("users", userService.getUsers());
         return "index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userDAO.getUserById(id));
+        model.addAttribute("user", userService.getUserById(id));
         return "show";
     }
 
     @GetMapping("/new")
-    public String newUser(Model model) {
-        model.addAttribute("user", new User());
+    public String newUser(@ModelAttribute("user") User user) {
         return "new";
     }
 
@@ -43,14 +45,14 @@ public class UsersControllter {
     public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "new";
-        userDAO.saveUser(user);
+        userService.saveUser(user);
         return "redirect:/users";
 
     }
 
     @GetMapping("/{id}/update")
     public String edit(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userDAO.getUserById(id));
+        model.addAttribute("user", userService.getUserById(id));
         return "edit";
     }
 
@@ -59,13 +61,13 @@ public class UsersControllter {
                              BindingResult bindingResult, @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
             return "edit";
-        userDAO.update(id, user);
+        userService.update(user);
         return "redirect:/users";
     }
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") int id) {
-        userDAO.delete(id);
+        userService.delete(id);
         return "redirect:/users";
     }
 }

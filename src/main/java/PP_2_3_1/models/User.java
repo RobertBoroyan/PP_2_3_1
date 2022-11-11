@@ -1,16 +1,24 @@
 package PP_2_3_1.models;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 
+
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Objects;
-
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "name")
     @NotEmpty(message = "Name is empty")
     @Size(min = 2, max = 20, message = "Name should be between 2 and 20 characters")
     private String name;
 
+    @Column(name = "sur_name")
     @NotEmpty(message = "Surname is empty")
     @Size(min = 2, max = 50, message = "Surname should be between 2 and 50 characters")
     private String surName;
