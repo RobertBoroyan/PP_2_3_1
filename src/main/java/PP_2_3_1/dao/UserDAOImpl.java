@@ -11,7 +11,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Service
-public class UserDAOImpl implements UserDAO{
+public class UserDAOImpl implements UserDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -38,6 +38,7 @@ public class UserDAOImpl implements UserDAO{
     public void update(User updatedUser) {
         entityManager.merge(updatedUser);
     }
+
     @Override
     @Transactional
     public void delete(int id) {

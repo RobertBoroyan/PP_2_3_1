@@ -1,11 +1,11 @@
 package PP_2_3_1.models;
 
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Objects;
+
 @Entity
 @Table(name = "users")
 public class User {

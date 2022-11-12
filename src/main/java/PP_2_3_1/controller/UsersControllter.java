@@ -25,13 +25,13 @@ public class UsersControllter {
 
 
     @GetMapping()
-    public String index(Model model) {
+    public String getUsers(Model model) {
         model.addAttribute("users", userService.getUsers());
         return "index";
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String getUserById(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "show";
     }
@@ -42,7 +42,7 @@ public class UsersControllter {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+    public String createUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "new";
         userService.saveUser(user);
@@ -51,7 +51,7 @@ public class UsersControllter {
     }
 
     @GetMapping("/{id}/update")
-    public String edit(@PathVariable("id") int id, Model model) {
+    public String editUser(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "edit";
     }
