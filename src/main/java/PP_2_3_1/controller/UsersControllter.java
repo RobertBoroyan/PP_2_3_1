@@ -51,7 +51,7 @@ public class UsersControllter {
     }
 
     @GetMapping("/{id}/update")
-    public String editUser(@PathVariable("id") int id, Model model) {
+    public String getUserFromForUpdate(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "edit";
     }
