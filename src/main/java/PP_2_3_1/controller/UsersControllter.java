@@ -37,7 +37,7 @@ public class UsersControllter {
     }
 
     @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user) {
+    public String getUserFormForCreate(@ModelAttribute("user") User user) {
         return "new";
     }
 
